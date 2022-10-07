@@ -1,0 +1,13 @@
+.input {
+  @apply  px-6 py-2 rounded-md placeholder-opacity-60 text-black text-opacity-60 placeholder-black text-lg border-2 border-white hover:border-primary focus:border-primary outline-none transition-all ease-in-out ;
+}
+
+.error {
+  @apply border-2 border-red-400 hover:border-red-400 focus:border-red-400 hover:bg-red-200 bg-red-100  focus:bg-red-200 ;
+}
+.normal {
+ @apply border-2 border-white hover:border-primary focus:border-primary ;
+}
+.success {
+  @apply border-2 border-green-400 hover:border-green-400 focus:border-green-400   hover:bg-green-200 bg-green-100 ;
+}

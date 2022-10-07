@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import Button from './components/ui/buttons/button/Button'
+import 'react-toastify/dist/ReactToastify.css'
 
+import { toast, ToastContainer } from 'react-toastify'
+import { Route, Routes } from 'react-router-dom'
+import MainLayout from './layouts/mainLayout/MainLayout'
+import AuthLayout from './layouts/authLayout/AuthLayout'
+import SignUp from './pages/auth/signUp/SignUp'
+import SignIn from './pages/auth/signIn/SignIn'
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <div className={'bg-bgPrimary min-h-screen '}>
+            <ToastContainer />
+            <Routes>
+                <Route path={'/auth/'} element={<AuthLayout />}>
+                    <Route path={'sign-up'} element={<SignUp />} />
+                    <Route path={'sign-in'} element={<SignIn />} />
+                </Route>
+                <Route path={'/'} element={<MainLayout />}></Route>
+            </Routes>
+        </div>
+    )
 }
 
-export default App;
+export default App

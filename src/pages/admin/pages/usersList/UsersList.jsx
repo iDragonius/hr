@@ -6,6 +6,7 @@ import Status from '../../../../components/ui/status/Status'
 const UsersList = () => {
     const [data, setData] = useState([
         [
+            '1',
             'a',
             'b',
             'asda',
@@ -13,6 +14,7 @@ const UsersList = () => {
             _(<Button primary label={'Edit'} size={'small'} />),
         ],
         [
+            '2',
             'c',
             'd',
             'adsasd',
@@ -23,8 +25,17 @@ const UsersList = () => {
     ])
     return (
         <Grid
+            sort={true}
+            search={true}
             data={data}
-            columns={['First Name', 'Last Name', 'Email', 'Status', 'Actions']}
+            columns={[
+                'ID',
+                'First Name',
+                'Last Name',
+                'Email',
+                'Status',
+                'Actions',
+            ]}
             style={{
                 td: {
                     'min-width': '80px',

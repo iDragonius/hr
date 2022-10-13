@@ -36,7 +36,7 @@ const NonWorkingDays = () => {
 
     const notify = () => {
         toast.success('Əməliyyat uğurla tamamlandı!', {
-            position: 'top-center',
+            position: 'top-right',
             autoClose: 5000,
             hideProgressBar: false,
             closeOnClick: true,

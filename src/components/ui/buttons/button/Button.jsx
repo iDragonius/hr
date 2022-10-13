@@ -6,6 +6,7 @@ const Button = ({
     label,
     color,
     backgroundColor,
+    className,
     borderColor,
     size = 'small',
     fontWeight = 'normal',
@@ -23,6 +24,7 @@ const Button = ({
                 styles[fontWeight + 'Weight'],
                 styles[shadow + 'Shadow'],
                 mode,
+                className,
             ].join(' ')}
             {...props}
         >

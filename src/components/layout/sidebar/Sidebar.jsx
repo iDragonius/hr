@@ -17,8 +17,12 @@ const Sidebar = () => {
     const [active, setActive] = useState('Workers')
     const location = useLocation()
     useEffect(() => {
+        if (location.pathname.split('/')[1] === 'hr') {
+            setActive('/hr/non-working-days')
+            return
+        }
         setActive(location.pathname)
-    }, [])
+    }, [location])
     return (
         <div className={'min-w-[220px] bg-white min-h-screen'}>
             <div

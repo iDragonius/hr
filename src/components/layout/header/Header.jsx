@@ -17,7 +17,10 @@ const Header = () => {
                 </p>
             </div>
             <div className={'flex'}>
-                <CPanel icon={<RiAdminLine size={24} color={'#000'} />} />
+                <CPanel
+                    icon={<RiAdminLine size={24} color={'#000'} />}
+                    whiteIcon={<RiAdminLine size={24} color={'#fff'} />}
+                />
 
                 <Notifications
                     icon={<IoMdNotificationsOutline size={24} color={'#000'} />}

@@ -2,7 +2,7 @@ import Button from './components/ui/buttons/button/Button'
 import 'react-toastify/dist/ReactToastify.css'
 
 import { toast, ToastContainer } from 'react-toastify'
-import { Route, Routes } from 'react-router-dom'
+import { Await, Route, Routes } from 'react-router-dom'
 import MainLayout from './layouts/mainLayout/MainLayout'
 import AuthLayout from './layouts/authLayout/AuthLayout'
 import SignUp from './pages/auth/signUp/SignUp'
@@ -18,6 +18,8 @@ import WorkingHours from './pages/workingHours/WorkingHours'
 import Illness from './pages/illness/Illness'
 import Dashboard from './pages/dashboard/Dashboard'
 import Admin from './pages/admin/Admin'
+import Awards from './pages/hr/awards/Awards'
+import Duty from './pages/hr/duty/Duty'
 function App() {
     return (
         <div className={'bg-bgPrimary min-h-screen '}>
@@ -33,7 +35,9 @@ function App() {
                         <Route
                             path={'non-working-days'}
                             element={<NonWorkingDays />}
-                        />
+                        />{' '}
+                        <Route path={'duty'} element={<Duty />} />
+                        <Route path={'awards'} element={<Awards />} />
                     </Route>
                     <Route path={'/'} element={<Dashboard />} />
                     <Route path={'salary'} element={<Salary />} />

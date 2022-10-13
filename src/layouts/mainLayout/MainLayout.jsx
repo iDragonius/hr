@@ -6,13 +6,11 @@ import { Outlet } from 'react-router-dom'
 const MainLayout = () => {
     return (
         <div className={'flex'}>
-            <div className={'fixed  h-screen w-10 bg-primary '} />
+            <div className={'fixed  h-screen w-6 bg-primary '} />
             <Sidebar />
-
-            <div className={'flex flex-col '}>
+            <div className={'flex flex-col w-full px-5'}>
                 <Header />
                 <Outlet />
-                <div className={'h-[1233px]'}></div>
             </div>
         </div>
     )

@@ -11,7 +11,7 @@ const CPanel = ({ icon, whiteIcon }) => {
     }, [location])
     return (
         <Link
-            to={'/admin'}
+            to={'/admin/users-list'}
             className={[
                 'p-2  shadow-md cursor-pointer mx-3 hover:scale-105 transition-all ease-in-out',
                 active ? 'bg-primary' : 'bg-white',

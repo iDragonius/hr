@@ -20,6 +20,8 @@ import Dashboard from './pages/dashboard/Dashboard'
 import Admin from './pages/admin/Admin'
 import Awards from './pages/hr/awards/Awards'
 import Duty from './pages/hr/duty/Duty'
+import UsersList from './pages/admin/pages/usersList/UsersList'
+import Token from './pages/admin/pages/token/Token'
 function App() {
     return (
         <div className={'bg-bgPrimary min-h-screen '}>
@@ -35,7 +37,7 @@ function App() {
                         <Route
                             path={'non-working-days'}
                             element={<NonWorkingDays />}
-                        />{' '}
+                        />
                         <Route path={'duty'} element={<Duty />} />
                         <Route path={'awards'} element={<Awards />} />
                     </Route>
@@ -46,7 +48,10 @@ function App() {
                     <Route path={'permissions'} element={<Permissions />} />
                     <Route path={'working-hours'} element={<WorkingHours />} />
                     <Route path={'illness'} element={<Illness />} />
-                    <Route path={'admin/'} element={<Admin />}></Route>
+                    <Route path={'admin/'} element={<Admin />}>
+                        <Route path={'users-list'} element={<UsersList />} />
+                        <Route path={'token'} element={<Token />} />
+                    </Route>
                 </Route>
             </Routes>
         </div>

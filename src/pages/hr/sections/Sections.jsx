@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import Section from './section/Section'
+import Section from '../../../components/pages/section/Section'
 
 const Sections = ({ active, setActive }) => {
     return (

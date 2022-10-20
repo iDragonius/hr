@@ -1,26 +1,42 @@
-import React from 'react';
-import PropTypes from "prop-types";
+import React from 'react'
+import PropTypes from 'prop-types'
 import styles from './TextInput.module.scss'
 
-
-const TextInput = ({label, width='400px' ,mode='normal' , type,change ,  value ,...props}) => {
-
-
+const TextInput = ({
+    label,
+    className,
+    width = '400px',
+    mode = 'normal',
+    type,
+    change,
+    value,
+    name,
+    ...props
+}) => {
     return (
-        <input className={[styles.input, styles[mode]].join(' ')} onChange={(e)=>change ? change(e.target.value) : e} style={{width}} placeholder={label} value={value} type={type} {...props} />
-    );
-};
-
-TextInput.propTypes ={
-    label:PropTypes.string,
-    type: PropTypes.oneOf(['text', 'email', 'password']),
-    mode:PropTypes.oneOf(['normal', 'error', 'success']),
-    change:PropTypes.func,
-    value:PropTypes.string,
-    width:PropTypes.string
+        <input
+            name={name}
+            className={[styles.input, styles[mode], className].join(' ')}
+            onChange={(e) => (change ? change(e) : e)}
+            style={{ width }}
+            placeholder={label}
+            value={value}
+            type={type}
+            {...props}
+        />
+    )
 }
-export default TextInput;
+
+TextInput.propTypes = {
+    label: PropTypes.string,
+    type: PropTypes.oneOf(['text', 'email', 'password']),
+    mode: PropTypes.oneOf(['normal', 'error', 'success']),
+    change: PropTypes.func,
+    value: PropTypes.string,
+    width: PropTypes.string,
+}
+export default TextInput
 
 TextInput.defaultValues = {
-    label:'Text'
+    label: 'Text',
 }

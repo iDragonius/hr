@@ -3,13 +3,15 @@ import { Grid, _ } from 'gridjs-react'
 import 'gridjs/dist/theme/mermaid.css'
 import { h } from 'gridjs'
 import Status from '../../../../components/ui/status/Status'
+import { useNavigate } from 'react-router-dom'
 const UsersList = () => {
     const [data, setData] = useState([
         ['1', 'a', 'b', 'asda', true, true],
         ['2', 'c', 'd', 'asdasd', false, false],
-        ['1', 'a', 'b', 'asdasd', true, true],
-        ['2', 'c', 'd', 'qweqwe', true, true],
+        ['3', 'a', 'b', 'asdasd', true, true],
+        ['4', 'c', 'd', 'qweqwe', true, true],
     ])
+    const navigate = useNavigate()
     return (
         <Grid
             sort={true}
@@ -24,7 +26,6 @@ const UsersList = () => {
                 {
                     name: 'Status',
                     formatter: (cell, row) => {
-                        console.log(cell)
                         return h(
                             'p',
                             {
@@ -32,7 +33,7 @@ const UsersList = () => {
                                     ? 'py-2  px-4 border rounded-md text-white bg-green-500'
                                     : 'py-2  px-4 border rounded-md text-white bg-red-500',
                             },
-                            cell ? 'Active' : 'Deactive'
+                            cell ? 'Active' : 'Inactive'
                         )
                     },
                 },
@@ -63,8 +64,8 @@ const UsersList = () => {
                                 className:
                                     'py-2  px-4 border rounded-md text-white bg-primary',
                                 onClick: () =>
-                                    alert(
-                                        `Editing "${row.cells[0].data}" "${row.cells[1].data}"`
+                                    navigate(
+                                        `/admin/users-list/${row.cells[0].data}`
                                     ),
                             },
                             'Edit'

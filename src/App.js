@@ -22,6 +22,7 @@ import Awards from './pages/hr/awards/Awards'
 import Duty from './pages/hr/duty/Duty'
 import UsersList from './pages/admin/pages/usersList/UsersList'
 import Token from './pages/admin/pages/token/Token'
+import User from './pages/admin/pages/user/User'
 function App() {
     return (
         <div className={'bg-bgPrimary min-h-screen '}>
@@ -50,6 +51,8 @@ function App() {
                     <Route path={'illness'} element={<Illness />} />
                     <Route path={'admin/'} element={<Admin />}>
                         <Route path={'users-list'} element={<UsersList />} />
+                        <Route path={'users-list/:id'} element={<User />} />
+
                         <Route path={'token'} element={<Token />} />
                     </Route>
                 </Route>

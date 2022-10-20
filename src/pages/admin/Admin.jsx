@@ -7,7 +7,7 @@ const Admin = () => {
     const location = useLocation()
     useEffect(() => {
         setActive(location.pathname)
-    }, [])
+    }, [location])
     return (
         <div>
             <Sections active={active} setActive={setActive} />

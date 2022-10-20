@@ -1,5 +1,5 @@
-import React from 'react';
-import  Button from './Button';
+import React from 'react'
+import Button from './Button'
 
 export default {
     title: 'Simple/Button',
@@ -17,14 +17,12 @@ export default {
             options: ['light', 'medium', 'large'],
             control: { type: 'select' },
         },
-
     },
-};
+}
 
-const Template = (args) => <Button {...args} />;
+const Template = (args) => <Button {...args} />
 
-export const Main = Template.bind({});
+export const Main = Template.bind({})
 Main.args = {
     label: 'Button',
-};
-
+}

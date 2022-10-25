@@ -3,7 +3,10 @@ import { RiAdminLine } from 'react-icons/ri'
 import { IoMdNotificationsOutline } from 'react-icons/io'
 import Notifications from './components/Notifications'
 import CPanel from './components/CPanel'
+import { useSelector } from 'react-redux'
+import { userData } from '../../../store/slices/authSlice'
 const Header = () => {
+    const data = useSelector(userData)
     return (
         <div
             className={
@@ -11,7 +14,9 @@ const Header = () => {
             }
         >
             <div>
-                <h1 className={'text-2xl font-bold'}>Good Morning, John!</h1>
+                <h1 className={'text-2xl font-bold'}>
+                    Good Morning, {data.name?.split(' ')[0]}!{' '}
+                </h1>
                 <p className={'opacity-60'}>
                     Happiness is nothing more than money
                 </p>

@@ -11,11 +11,16 @@ import { MdOutlinePermIdentity } from 'react-icons/md'
 import { AiFillPicture } from 'react-icons/ai'
 import { MdPeopleAlt } from 'react-icons/md'
 import Logout from './components/logout/Logout'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { deleteUserData, userData } from '../../../store/slices/authSlice'
 
 const Sidebar = () => {
     const [active, setActive] = useState('Workers')
     const location = useLocation()
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const data = useSelector(userData)
     useEffect(() => {
         if (location.pathname.split('/')[1] === 'hr') {
             setActive('/hr/non-working-days')
@@ -23,6 +28,12 @@ const Sidebar = () => {
         }
         setActive(location.pathname)
     }, [location])
+
+    const logout = async () => {
+        localStorage.removeItem('token')
+        dispatch(deleteUserData())
+        navigate('/auth/sign-in')
+    }
     return (
         <div className={'min-w-[220px] bg-white min-h-screen'}>
             <div
@@ -30,7 +41,7 @@ const Sidebar = () => {
             >
                 <div>
                     <User
-                        name={'John Doe'}
+                        name={data.name}
                         path={
                             'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
                         }
@@ -116,7 +127,7 @@ const Sidebar = () => {
                         whiteIcon={<GiReceiveMoney size={24} color={'#fff'} />}
                     />
                 </div>
-                <Logout />
+                <Logout action={logout} />
             </div>
         </div>
     )

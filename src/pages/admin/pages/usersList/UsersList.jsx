@@ -1,9 +1,10 @@
 import React, { useState, memo } from 'react'
+import 'gridjs/dist/theme/mermaid.min.css'
 import { Grid, _ } from 'gridjs-react'
-import 'gridjs/dist/theme/mermaid.css'
 import { h } from 'gridjs'
 import Status from '../../../../components/ui/status/Status'
 import { useNavigate } from 'react-router-dom'
+import Button from '../../../../components/ui/buttons/button/Button'
 const UsersList = () => {
     const [data, setData] = useState([
         ['1', 'a', 'b', 'asda', true, true],
@@ -14,6 +15,7 @@ const UsersList = () => {
     const navigate = useNavigate()
     return (
         <Grid
+            resizable={true}
             sort={true}
             search={true}
             data={data}
@@ -23,6 +25,7 @@ const UsersList = () => {
                 'First Name',
                 'Last Name',
                 'Email',
+
                 {
                     name: 'Status',
                     formatter: (cell, row) => {

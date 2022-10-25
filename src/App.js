@@ -1,8 +1,6 @@
-import Button from './components/ui/buttons/button/Button'
 import 'react-toastify/dist/ReactToastify.css'
-
-import { toast, ToastContainer } from 'react-toastify'
-import { Await, Route, Routes } from 'react-router-dom'
+import { ToastContainer } from 'react-toastify'
+import { Route, Routes } from 'react-router-dom'
 import MainLayout from './layouts/mainLayout/MainLayout'
 import AuthLayout from './layouts/authLayout/AuthLayout'
 import SignUp from './pages/auth/signUp/SignUp'
@@ -23,7 +21,21 @@ import Duty from './pages/hr/duty/Duty'
 import UsersList from './pages/admin/pages/usersList/UsersList'
 import Token from './pages/admin/pages/token/Token'
 import User from './pages/admin/pages/user/User'
+import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { setUserData } from './store/slices/authSlice'
 function App() {
+    const dispatch = useDispatch()
+    useEffect(() => {
+        dispatch(
+            setUserData({
+                name: localStorage.getItem('name'),
+                token: localStorage.getItem('token'),
+                email: localStorage.getItem('email'),
+            })
+        )
+    }, [])
+
     return (
         <div className={'bg-bgPrimary min-h-screen '}>
             <ToastContainer />

@@ -2,7 +2,7 @@ import React from 'react'
 
 const User = ({ path, name }) => {
     return (
-        <div className={'flex flex-col items-center mb-7 '}>
+        <div className={'flex flex-col items-center mb-7  '}>
             <img
                 src={path}
                 alt={name}
@@ -10,7 +10,9 @@ const User = ({ path, name }) => {
                 height={120}
                 className={'rounded-full mb-2'}
             />
-            <h1 className={'text-2xl opacity-70'}>{name}</h1>
+            <h1 className={'text-2xl opacity-70 w-min text-center  '}>
+                {name}
+            </h1>
         </div>
     )
 }

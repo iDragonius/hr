@@ -27,7 +27,7 @@ const SignIn = () => {
                         res.data?.loggedUser?.lastName
                 )
                 localStorage.setItem('email', res.data?.loggedUser?.email)
-
+                localStorage.setItem('id', res.data?.loggedUser?.id)
                 toast.success('Successful!')
 
                 dispatch(

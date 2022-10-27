@@ -55,6 +55,8 @@ const SignUp = () => {
                         res.data?.registeredUser?.lastName
                 )
                 localStorage.setItem('email', res.data?.registeredUser?.email)
+                localStorage.setItem('id', res.data?.registeredUser?.id)
+
                 dispatch(
                     setUserData({
                         name:
@@ -81,7 +83,7 @@ const SignUp = () => {
                 <div className={'flex flex-col'}>
                     <input
                         type={'text'}
-                        placeholder={'XyZ681qwE'}
+                        placeholder={'9 number code ...'}
                         className={
                             'border-[1px] px-6 py-2 rounded-md placeholder-opacity-60 text-black outline-none text-opacity-60 placeholder-black text-lg my-4 hover:border-primary focus:border-primary outline-none transition-all ease-in-out'
                         }

@@ -31,6 +31,9 @@ const Sidebar = () => {
 
     const logout = async () => {
         localStorage.removeItem('token')
+        localStorage.removeItem('name')
+        localStorage.removeItem('id')
+        localStorage.removeItem('email')
         dispatch(deleteUserData())
         navigate('/auth/sign-in')
     }

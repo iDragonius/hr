@@ -1,23 +1,34 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Select from 'react-select'
 import Button from '../../../../components/ui/buttons/button/Button'
 import { FiCopy } from 'react-icons/fi'
 import { toast } from 'react-toastify'
 import $api from '../../../../http'
 import { customStyles } from '../../../../shared/selectStyles'
-
+import { roles } from '../../../../config/rolesConf'
 const Token = () => {
-    const [token, setToken] = useState('12893qduig127d12t97')
-    const [generated, setGenerated] = useState(true)
-    const values = [
-        { label: 'Admin', value: 1 },
-        { label: 'User', value: 3 },
-        { label: 'HR', value: 2 },
-    ]
+    const [token, setToken] = useState('')
+    const [generated, setGenerated] = useState(false)
+    const [selectedRole, setSelectedRole] = useState(0)
+
+    useEffect(() => {
+        roles.filter((data) => {
+            data.label = data.name
+        })
+    }, [])
+
+    const createToken = async () => {
+        await $api
+            .get(`/UserKeys/generatekey/?roleId=${selectedRole}`)
+            .then((res) => {
+                console.log(res)
+                setToken(res.data.secretKey)
+                setGenerated(true)
+            })
+    }
 
     const copyToClipboard = () => {
         navigator.clipboard.writeText(token)
-
         toast.success('Token copied successfully!', {
             position: 'top-right',
             autoClose: 5000,
@@ -27,16 +38,23 @@ const Token = () => {
             draggable: true,
         })
     }
+
     return (
         <div className={'px-2'}>
             <h1 className={'text-xl mt-6 mb-3'}>Generate Sign Up Token</h1>
             <div className={'flex'}>
                 <Select
-                    options={values}
+                    options={roles}
                     styles={customStyles}
+                    onChange={(data) => setSelectedRole(data.value)}
                     placeholder={'Select Role...'}
                 />
-                <Button label={'Generate'} primary className={'ml-5'} />
+                <Button
+                    label={'Generate'}
+                    primary
+                    className={'ml-5'}
+                    onClick={createToken}
+                />
             </div>
             {generated && (
                 <div className={'mt-6'}>

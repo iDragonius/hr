@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
-const CPanel = ({ icon, whiteIcon }) => {
+const LinkButton = ({ icon, whiteIcon, path }) => {
     const location = useLocation()
     const [active, setActive] = useState(false)
     useEffect(() => {
-        location.pathname.split('/')[1] === 'admin'
-            ? setActive(true)
-            : setActive(false)
+        location.pathname === path ? setActive(true) : setActive(false)
     }, [location])
     return (
         <Link
-            to={'/admin/users-list'}
+            to={path}
             className={[
                 'p-2  shadow-md cursor-pointer mx-3 hover:scale-105 transition-all ease-in-out',
                 active ? 'bg-primary' : 'bg-white',
@@ -22,4 +20,4 @@ const CPanel = ({ icon, whiteIcon }) => {
     )
 }
 
-export default CPanel
+export default LinkButton

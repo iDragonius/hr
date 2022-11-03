@@ -20,6 +20,8 @@ import Admin from '../../pages/admin/Admin'
 import UsersList from '../../pages/admin/pages/usersList/UsersList'
 import User from '../../pages/admin/pages/user/User'
 import Token from '../../pages/admin/pages/token/Token'
+import Profile from '../../pages/profile/Profile'
+import RoleWrapper from '../../features/roles/RoleWrapper'
 
 const Navigation = () => {
     return (
@@ -29,28 +31,43 @@ const Navigation = () => {
                 <Route path={'sign-in'} element={<SignIn />} />
             </Route>
             <Route path={'/'} element={<MainLayout />}>
-                <Route path={'staff-add'} element={<StaffAdding />} />
-                <Route path={'hr/'} element={<HR />}>
-                    <Route
-                        path={'non-working-days'}
-                        element={<NonWorkingDays />}
-                    />
-                    <Route path={'duty'} element={<Duty />} />
-                    <Route path={'awards'} element={<Awards />} />
-                </Route>
                 <Route path={'/'} element={<Dashboard />} />
+                <Route path={'profile'} element={<Profile />} />
+
+                <Route element={<RoleWrapper routeRole={'3'} />}>
+                    <Route element={<RoleWrapper routeRole={'2'} />}>
+                        <Route path={'hr/'} element={<HR />}>
+                            <Route
+                                path={'non-working-days'}
+                                element={<NonWorkingDays />}
+                            />
+                            <Route path={'duty'} element={<Duty />} />
+                            <Route path={'awards'} element={<Awards />} />
+                        </Route>
+                        <Route path={'staff-add'} element={<StaffAdding />} />
+
+                        <Route element={<RoleWrapper routeRole={'1'} />}>
+                            <Route path={'admin/'} element={<Admin />}>
+                                <Route
+                                    path={'users-list'}
+                                    element={<UsersList />}
+                                />
+                                <Route
+                                    path={'users-list/:id'}
+                                    element={<User />}
+                                />
+                                <Route path={'token'} element={<Token />} />
+                            </Route>
+                        </Route>
+                    </Route>
+                </Route>
+
                 <Route path={'salary'} element={<Salary />} />
                 <Route path={'vacation'} element={<Vacation />} />
                 <Route path={'tabel'} element={<Tabel />} />
                 <Route path={'permissions'} element={<Permissions />} />
                 <Route path={'working-hours'} element={<WorkingHours />} />
                 <Route path={'illness'} element={<Illness />} />
-                <Route path={'admin/'} element={<Admin />}>
-                    <Route path={'users-list'} element={<UsersList />} />
-                    <Route path={'users-list/:id'} element={<User />} />
-
-                    <Route path={'token'} element={<Token />} />
-                </Route>
             </Route>
         </Routes>
     )

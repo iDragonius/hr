@@ -1,5 +1,4 @@
 import React from 'react'
-import { RiAdminLine } from 'react-icons/ri'
 
 const Notifications = ({ icon }) => {
     return (

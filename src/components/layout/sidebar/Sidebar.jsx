@@ -14,6 +14,7 @@ import Logout from './components/logout/Logout'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { deleteUserData, userData } from '../../../store/slices/authSlice'
+import RoleCheckerUI from '../../../features/roles/RoleCheckerUI'
 
 const Sidebar = () => {
     const [active, setActive] = useState('Workers')
@@ -30,10 +31,6 @@ const Sidebar = () => {
     }, [location])
 
     const logout = async () => {
-        localStorage.removeItem('token')
-        localStorage.removeItem('name')
-        localStorage.removeItem('id')
-        localStorage.removeItem('email')
         dispatch(deleteUserData())
         navigate('/auth/sign-in')
     }
@@ -49,6 +46,7 @@ const Sidebar = () => {
                             'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
                         }
                     />
+
                     <Navigation
                         name={'Dashboard'}
                         path={'/'}
@@ -65,16 +63,20 @@ const Sidebar = () => {
                         whiteIcon={<MdPeopleAlt size={24} color={'#fff'} />}
                         icon={<MdPeopleAlt size={24} color={'#000'} />}
                     />
-                    <Navigation
-                        name={'HR'}
-                        path={'/hr/non-working-days'}
-                        active={active}
-                        setActive={setActive}
-                        icon={<SiGoogletagmanager size={24} color={'#000'} />}
-                        whiteIcon={
-                            <SiGoogletagmanager size={24} color={'#fff'} />
-                        }
-                    />
+                    <RoleCheckerUI routeRole={2}>
+                        <Navigation
+                            name={'HR'}
+                            path={'/hr/non-working-days'}
+                            active={active}
+                            setActive={setActive}
+                            icon={
+                                <SiGoogletagmanager size={24} color={'#000'} />
+                            }
+                            whiteIcon={
+                                <SiGoogletagmanager size={24} color={'#fff'} />
+                            }
+                        />
+                    </RoleCheckerUI>
                     <Navigation
                         name={'Illness'}
                         path={'/illness'}

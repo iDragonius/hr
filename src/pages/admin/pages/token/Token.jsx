@@ -11,10 +11,17 @@ const Token = () => {
     const [generated, setGenerated] = useState(false)
     const [selectedRole, setSelectedRole] = useState(0)
 
+    const getRoles = async () => {
+        await $api.get('/Auth/getallroles').then((res) => {
+            console.log(res)
+        })
+    }
+
     useEffect(() => {
         roles.filter((data) => {
             data.label = data.name
         })
+        getRoles()
     }, [])
 
     const createToken = async () => {

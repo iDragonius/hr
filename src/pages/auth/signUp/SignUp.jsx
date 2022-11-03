@@ -30,9 +30,7 @@ const SignUp = () => {
         await $api
             .post('/auth/registercheck', { ...data })
             .then((res) => {
-                if (res.data) {
-                    setModal(true)
-                }
+                if (res.data) setModal(true)
             })
             .catch((err) => {
                 console.log(err)
@@ -41,21 +39,11 @@ const SignUp = () => {
     }
     const signUp = async (e) => {
         e.preventDefault()
+        if (!data) return
         await $api
-            .post('/auth/register', { ...data, code: token })
+            .post('/UserKeys/registerwithkey', { ...data, code: token })
             .then((res) => {
-                if (res.data) {
-                    setModal(false)
-                }
-                localStorage.setItem('token', res.data.accessToken.token)
-                localStorage.setItem(
-                    'name',
-                    res.data?.registeredUser?.firstName +
-                        ' ' +
-                        res.data?.registeredUser?.lastName
-                )
-                localStorage.setItem('email', res.data?.registeredUser?.email)
-                localStorage.setItem('id', res.data?.registeredUser?.id)
+                if (res.data) setModal(false)
 
                 dispatch(
                     setUserData({
@@ -65,6 +53,7 @@ const SignUp = () => {
                             res.data?.registeredUser?.lastName,
                         token: res.data?.accessToken.token,
                         email: res.data?.registeredUser?.email,
+                        id: res.data?.registeredUser?.id,
                     })
                 )
                 toast.success('Successful!')
@@ -123,7 +112,6 @@ const SignUp = () => {
                     className={'mb-5'}
                     name={'email'}
                     mode={'normal'}
-                    // pattern={'^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$'}
                     change={change}
                     value={data.email}
                 />

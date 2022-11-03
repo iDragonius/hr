@@ -1,0 +1,15 @@
+export const wiseWords = [
+    'Failure is not the opposite of success: it’s part of success.',
+    'If your dreams don’t scare you, they are too small.',
+    'Believe you can and you’re halfway there.',
+    'Quality means doing it right when no one is looking.',
+    'The difference between ordinary and extraordinary is that little extra.',
+    'It always seems impossible until it’s done.',
+    'What we fear of doing most is usually what we most need to do.',
+    'You are not your resume, you are your work.',
+    'Every accomplishment starts with the decision to try.',
+    'Those who say it cannot be done should not interrupt those doing it.',
+    'Never put off until tomorrow what you can do the day after tomorrow.',
+    'The best revenge is massive success.',
+    'Work hard and be kind and amazing things will happen.',
+]

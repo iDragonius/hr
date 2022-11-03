@@ -38,6 +38,7 @@ const SignIn = () => {
                             res.data?.loggedUser?.lastName,
                         token: res.data?.accessToken.token,
                         email: res.data?.loggedUser?.email,
+                        id: res.data?.loggedUser?.id,
                     })
                 )
                 navigate('/')

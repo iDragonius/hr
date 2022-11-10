@@ -8,12 +8,12 @@ import { userData } from '../../../store/slices/authSlice'
 import { CgProfile } from 'react-icons/cg'
 import { wiseWords } from '../../../shared'
 import RoleCheckerUI from '../../../features/roles/RoleCheckerUI'
-import { useRole } from '../../../features/roles/useRole'
+import { rolesEnums } from '../../../config'
+
 const Header = () => {
     const [time, setTime] = useState('Morning')
     const [proverb, setProver] = useState('')
     const data = useSelector(userData)
-    const roleCheck = useRole(2)
 
     useEffect(() => {
         const time = new Date().getHours()
@@ -41,7 +41,7 @@ const Header = () => {
                 <p className={'opacity-60'}>{proverb}</p>
             </div>
             <div className={'flex'}>
-                <RoleCheckerUI routeRole={1}>
+                <RoleCheckerUI routeRole={rolesEnums.ADMIN}>
                     <LinkButton
                         path={'/admin/users-list'}
                         icon={<RiAdminLine size={24} color={'#000'} />}
@@ -49,7 +49,7 @@ const Header = () => {
                     />
                 </RoleCheckerUI>
                 <LinkButton
-                    path={'/profile'}
+                    path={'/profile/main-info'}
                     icon={<CgProfile size={24} color={'#000'} />}
                     whiteIcon={<CgProfile size={24} color={'#fff'} />}
                 />

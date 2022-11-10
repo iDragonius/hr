@@ -15,6 +15,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { deleteUserData, userData } from '../../../store/slices/authSlice'
 import RoleCheckerUI from '../../../features/roles/RoleCheckerUI'
+import { rolesEnums } from '../../../config'
 
 const Sidebar = () => {
     const [active, setActive] = useState('Workers')
@@ -55,15 +56,16 @@ const Sidebar = () => {
                         whiteIcon={<MdDashboard size={24} color={'#fff'} />}
                         icon={<MdDashboard size={24} color={'#000'} />}
                     />
-                    <Navigation
-                        name={'Workers'}
-                        path={'/staff-add'}
-                        active={active}
-                        setActive={setActive}
-                        whiteIcon={<MdPeopleAlt size={24} color={'#fff'} />}
-                        icon={<MdPeopleAlt size={24} color={'#000'} />}
-                    />
-                    <RoleCheckerUI routeRole={2}>
+                    <RoleCheckerUI routeRole={rolesEnums.HR}>
+                        <Navigation
+                            name={'Workers'}
+                            path={'/staff-add'}
+                            active={active}
+                            setActive={setActive}
+                            whiteIcon={<MdPeopleAlt size={24} color={'#fff'} />}
+                            icon={<MdPeopleAlt size={24} color={'#000'} />}
+                        />
+
                         <Navigation
                             name={'HR'}
                             path={'/hr/non-working-days'}
@@ -115,14 +117,18 @@ const Sidebar = () => {
                             <BsHourglassSplit size={24} color={'#fff'} />
                         }
                     />
-                    <Navigation
-                        name={'Tabel'}
-                        path={'/tabel'}
-                        active={active}
-                        setActive={setActive}
-                        icon={<CgFileDocument size={24} color={'#000'} />}
-                        whiteIcon={<CgFileDocument size={24} color={'#fff'} />}
-                    />
+                    <RoleCheckerUI routeRole={rolesEnums.MUHASIB}>
+                        <Navigation
+                            name={'Tabel'}
+                            path={'/tabel'}
+                            active={active}
+                            setActive={setActive}
+                            icon={<CgFileDocument size={24} color={'#000'} />}
+                            whiteIcon={
+                                <CgFileDocument size={24} color={'#fff'} />
+                            }
+                        />
+                    </RoleCheckerUI>
                     <Navigation
                         name={'Salary'}
                         path={'/salary'}

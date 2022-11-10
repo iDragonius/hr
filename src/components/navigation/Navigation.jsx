@@ -22,6 +22,8 @@ import User from '../../pages/admin/pages/user/User'
 import Token from '../../pages/admin/pages/token/Token'
 import Profile from '../../pages/profile/Profile'
 import RoleWrapper from '../../features/roles/RoleWrapper'
+import ChangePassword from '../../pages/profile/changePassword/ChangePassword'
+import MainInfo from '../../pages/profile/mainInfo/MainInfo'
 
 const Navigation = () => {
     return (
@@ -32,7 +34,13 @@ const Navigation = () => {
             </Route>
             <Route path={'/'} element={<MainLayout />}>
                 <Route path={'/'} element={<Dashboard />} />
-                <Route path={'profile'} element={<Profile />} />
+                <Route path={'profile/'} element={<Profile />}>
+                    <Route path={'main-info'} element={<MainInfo />} />
+                    <Route
+                        path={'change-password'}
+                        element={<ChangePassword />}
+                    />
+                </Route>
 
                 <Route element={<RoleWrapper routeRole={'3'} />}>
                     <Route element={<RoleWrapper routeRole={'2'} />}>

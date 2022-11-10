@@ -1,17 +1,36 @@
-import React, { useState, memo } from 'react'
+import React, { useState, memo, useEffect } from 'react'
 import 'gridjs/dist/theme/mermaid.min.css'
-import { Grid, _ } from 'gridjs-react'
+import { Grid } from 'gridjs-react'
 import { h } from 'gridjs'
-import Status from '../../../../components/ui/status/Status'
 import { useNavigate } from 'react-router-dom'
-import Button from '../../../../components/ui/buttons/button/Button'
+import $api from '../../../../http'
+import { changeStatus } from '../../../../http/api/admin'
+import { useDispatch } from 'react-redux'
+import { setCurrentUserData } from '../../../../store/slices/adminSlice'
 const UsersList = () => {
-    const [data, setData] = useState([
-        ['1', 'a', 'b', 'asda', true, true],
-        ['2', 'c', 'd', 'asdasd', false, false],
-        ['3', 'a', 'b', 'asdasd', true, true],
-        ['4', 'c', 'd', 'qweqwe', true, true],
-    ])
+    const dispatch = useDispatch()
+    const fetchUsers = async () => {
+        await $api.get('/Auth/getallusers').then((res) => {
+            const tempData = []
+            res.data.map((user) => {
+                tempData.push([
+                    user.id,
+                    user.firstName,
+                    user.lastName,
+                    user.email,
+                    user.status,
+                    user.status,
+                ])
+            })
+            setData([...tempData])
+            console.log(tempData)
+        })
+    }
+    useEffect(() => {
+        fetchUsers()
+    }, [])
+
+    const [data, setData] = useState([])
     const navigate = useNavigate()
     return (
         <Grid
@@ -49,10 +68,15 @@ const UsersList = () => {
                                 className: cell
                                     ? 'py-2  px-4 border rounded-md text-white bg-primary'
                                     : ' border-[1px]  py-2  px-4 text-primary rounded-md font-bold',
-                                onClick: () =>
-                                    alert(
-                                        `Editing "${row.cells[0].data}" "${row.cells[1].data}"`
-                                    ),
+                                onClick: async () => {
+                                    const res = await changeStatus(
+                                        row.cells[0].data,
+                                        !row.cells[4].data
+                                    )
+                                    if (res.status === 200) {
+                                        await fetchUsers()
+                                    }
+                                },
                             },
                             cell ? 'Block' : 'Unblock'
                         )
@@ -66,10 +90,20 @@ const UsersList = () => {
                             {
                                 className:
                                     'py-2  px-4 border rounded-md text-white bg-primary',
-                                onClick: () =>
+                                onClick: () => {
                                     navigate(
                                         `/admin/users-list/${row.cells[0].data}`
-                                    ),
+                                    )
+                                    dispatch(
+                                        setCurrentUserData({
+                                            id: row.cells[0].data,
+                                            firstName: row.cells[1].data,
+                                            lastName: row.cells[2].data,
+                                            email: row.cells[3].data,
+                                            status: row.cells[4].data,
+                                        })
+                                    )
+                                },
                             },
                             'Edit'
                         )

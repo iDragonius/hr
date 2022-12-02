@@ -17,8 +17,7 @@ const Header = () => {
 
     useEffect(() => {
         const time = new Date().getHours()
-
-        if (time > 0 && time < 12) {
+        if (time > 0 && time <= 12) {
             setTime('Morning')
         } else if (time > 12 && time < 18) {
             setTime('Afternoon')

@@ -4,18 +4,26 @@ import Button from '../../../components/ui/buttons/button/Button'
 import $api from '../../../http'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import { useDispatch } from 'react-redux'
-import { setUserData } from '../../../store/slices/authSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import {
+    pageLoading,
+    setRole,
+    setUserData,
+    toggleLoading,
+} from '../../../store/slices/authSlice'
+import { fetchRoles } from '../../../http/api/admin'
 
 const SignIn = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
+
     const [data, setData] = useState({
         email: '',
         password: '',
     })
     const signIn = async (e) => {
         e.preventDefault()
+        dispatch(toggleLoading(true))
         await $api
             .post('/Auth/login', { ...data })
             .then((res) => {
@@ -41,6 +49,11 @@ const SignIn = () => {
                         id: res.data?.loggedUser?.id,
                     })
                 )
+                fetchRoles(+res.data?.loggedUser?.id)
+                    .then((res) => {
+                        dispatch(setRole(res.data[0].name))
+                    })
+                    .finally(() => dispatch(toggleLoading(false)))
                 navigate('/')
             })
             .catch((err) => {

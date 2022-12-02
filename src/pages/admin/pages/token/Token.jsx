@@ -4,18 +4,13 @@ import Button from '../../../../components/ui/buttons/button/Button'
 import { FiCopy } from 'react-icons/fi'
 import { toast } from 'react-toastify'
 import $api from '../../../../http'
-import { customStyles } from '../../../../shared/selectStyles'
-import { roles } from '../../../../config/rolesConf'
+import { customStyles } from '../../../../shared'
+import { roles } from '../../../../config'
+import { getRoles } from '../../../../http/api/admin'
 const Token = () => {
     const [token, setToken] = useState('')
     const [generated, setGenerated] = useState(false)
     const [selectedRole, setSelectedRole] = useState(0)
-
-    const getRoles = async () => {
-        await $api.get('/Auth/getallroles').then((res) => {
-            console.log(res)
-        })
-    }
 
     useEffect(() => {
         roles.filter((data) => {

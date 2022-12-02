@@ -5,8 +5,13 @@ import TextInput from '../../../components/ui/inputs/textInput/TextInput'
 import $api from '../../../http'
 import CommonModal from '../../../components/ui/modals/commonModal/CommonModal'
 import { useNavigate } from 'react-router-dom'
-import { setUserData } from '../../../store/slices/authSlice'
+import {
+    setRole,
+    setUserData,
+    toggleLoading,
+} from '../../../store/slices/authSlice'
 import { useDispatch } from 'react-redux'
+import { fetchRoles } from '../../../http/api/admin'
 
 const SignUp = () => {
     const navigate = useNavigate()
@@ -40,6 +45,7 @@ const SignUp = () => {
     const signUp = async (e) => {
         e.preventDefault()
         if (!data) return
+        dispatch(toggleLoading(true))
         await $api
             .post('/UserKeys/registerwithkey', { ...data, code: token })
             .then((res) => {
@@ -58,12 +64,17 @@ const SignUp = () => {
                 )
                 toast.success('Successful!')
                 localStorage.setItem('token', res.data.accessToken.token)
+                fetchRoles(+res.data?.registeredUser?.id).then((res) => {
+                    dispatch(setRole(res.data[0].name))
+                })
+
                 navigate('/')
             })
             .catch((err) => {
                 console.log(err)
                 toast.error('Smthng get wrong :(')
             })
+            .finally(() => dispatch(toggleLoading(false)))
     }
     return (
         <div>

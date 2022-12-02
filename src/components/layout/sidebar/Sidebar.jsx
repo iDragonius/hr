@@ -4,18 +4,18 @@ import Navigation from './components/navigation/Navigation'
 import { MdDashboard } from 'react-icons/md'
 import { SiGoogletagmanager } from 'react-icons/si'
 import { MdOutlineSick } from 'react-icons/md'
-import { GiReceiveMoney } from 'react-icons/gi'
 import { BsHourglassSplit } from 'react-icons/bs'
 import { CgFileDocument } from 'react-icons/cg'
 import { MdOutlinePermIdentity } from 'react-icons/md'
 import { AiFillPicture } from 'react-icons/ai'
 import { MdPeopleAlt } from 'react-icons/md'
-import Logout from './components/logout/Logout'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { deleteUserData, userData } from '../../../store/slices/authSlice'
 import RoleCheckerUI from '../../../features/roles/RoleCheckerUI'
 import { rolesEnums } from '../../../config'
+import { GiReceiveMoney } from 'react-icons/gi'
+import Logout from './components/logout/Logout'
 
 const Sidebar = () => {
     const [active, setActive] = useState('Workers')
@@ -59,7 +59,7 @@ const Sidebar = () => {
                     <RoleCheckerUI routeRole={rolesEnums.HR}>
                         <Navigation
                             name={'Workers'}
-                            path={'/staff-add'}
+                            path={'/staff/list'}
                             active={active}
                             setActive={setActive}
                             whiteIcon={<MdPeopleAlt size={24} color={'#fff'} />}

@@ -5,20 +5,14 @@ const Sections = ({ active, setActive }) => {
     return (
         <div className={'flex py-3'}>
             <Section
-                name={'Non Working Days'}
-                path={'/hr/non-working-days'}
+                name={'List'}
+                path={'/staff/list'}
                 active={active}
                 setActive={setActive}
             />
             <Section
-                name={'Duty'}
-                path={'/hr/duty'}
-                active={active}
-                setActive={setActive}
-            />
-            <Section
-                name={'Awards'}
-                path={'/hr/awards'}
+                name={'Add'}
+                path={'/staff/add'}
                 active={active}
                 setActive={setActive}
             />

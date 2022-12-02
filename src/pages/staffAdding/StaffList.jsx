@@ -1,39 +1,22 @@
-import React, { useState, memo, useEffect } from 'react'
-import 'gridjs/dist/theme/mermaid.min.css'
+import React, { useState } from 'react'
 import { Grid } from 'gridjs-react'
 import { h } from 'gridjs'
+import { changeStatus, fetchUsers } from '../../http/api/admin'
+import { setCurrentUserData } from '../../store/slices/adminSlice'
 import { useNavigate } from 'react-router-dom'
-import { changeStatus, fetchUsers } from '../../../../http/api/admin'
 import { useDispatch } from 'react-redux'
-import { setCurrentUserData } from '../../../../store/slices/adminSlice'
-const UsersList = () => {
+
+const StaffList = () => {
+    const navigate = useNavigate()
     const dispatch = useDispatch()
     const [data, setData] = useState([])
-    useEffect(() => {
-        fetchUsers().then((res) => {
-            const tempData = []
-            res.data.map((user) => {
-                tempData.push([
-                    user.id,
-                    user.firstName,
-                    user.lastName,
-                    user.email,
-                    user.status,
-                    user.status,
-                ])
-            })
-            setData([...tempData])
-        })
-    }, [])
-
-    const navigate = useNavigate()
     return (
         <Grid
             resizable={true}
             sort={true}
-            search={true}
             data={data}
-            width={'min-content'}
+            search={true}
+            width={'max-content'}
             columns={[
                 'ID',
                 'First Name',
@@ -69,14 +52,7 @@ const UsersList = () => {
                                         !row.cells[4].data
                                     )
                                     if (res.status === 200) {
-                                        const tempData = [...data]
-                                        const block = tempData.find(
-                                            (data) =>
-                                                data[0] === row.cells[0].data
-                                        )
-                                        block[4] = !cell
-                                        block[5] = !cell
-                                        setData([...tempData])
+                                        await fetchUsers()
                                     }
                                 },
                             },
@@ -124,4 +100,4 @@ const UsersList = () => {
     )
 }
 
-export default memo(UsersList)
+export default StaffList

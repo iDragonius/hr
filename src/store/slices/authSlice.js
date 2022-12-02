@@ -7,7 +7,8 @@ const authSlice = createSlice({
         token: '',
         email: '',
         id: 0,
-        role: '',
+        role: '4',
+        loading: true,
     },
     reducers: {
         setUserData: (state, action) => {
@@ -15,7 +16,9 @@ const authSlice = createSlice({
             state.token = action.payload.token
             state.email = action.payload.email
             state.id = action.payload.id
-            console.log(action.payload)
+            if (!action.payload.token) {
+                return
+            }
             localStorage.setItem('token', action.payload.token)
             localStorage.setItem('name', action.payload.name)
             localStorage.setItem('email', action.payload.email)
@@ -23,6 +26,9 @@ const authSlice = createSlice({
         },
         setRole: (state, action) => {
             state.role = action.payload
+        },
+        toggleLoading: (state, action) => {
+            state.loading = action.payload
         },
         deleteUserData: (state) => {
             state.name = ''
@@ -39,7 +45,8 @@ const authSlice = createSlice({
 
 export default authSlice.reducer
 
-export const { setUserData, deleteUserData, setRole } = authSlice.actions
+export const { setUserData, deleteUserData, setRole, toggleLoading } =
+    authSlice.actions
 
 export const userData = (state) => {
     return {
@@ -50,3 +57,4 @@ export const userData = (state) => {
 }
 
 export const userRole = (state) => state.auth.role
+export const pageLoading = (state) => state.auth.loading

@@ -13,6 +13,7 @@ import Navigation from './components/navigation/Navigation'
 import { fetchRoles } from './http/api/admin'
 import Loader from './components/ui/Loader'
 import { useNavigate } from 'react-router-dom'
+import { getUserNotifications } from './http/api/notification'
 
 function App() {
     const dispatch = useDispatch()
@@ -35,6 +36,9 @@ function App() {
             dispatch(toggleLoading(false))
             return
         }
+        getUserNotifications(+localStorage.getItem('id')).then((res) => {
+            console.log(res)
+        })
         fetchRoles(localStorage.getItem('id'))
             .then((res) => {
                 dispatch(setRole(res.data[0].name))

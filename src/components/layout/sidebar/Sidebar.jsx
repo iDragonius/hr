@@ -109,7 +109,7 @@ const Sidebar = () => {
                     />
                     <Navigation
                         name={'Working Hours'}
-                        path={'/working-hours'}
+                        path={'/working-hours/list'}
                         active={active}
                         setActive={setActive}
                         icon={<BsHourglassSplit size={24} color={'#000'} />}

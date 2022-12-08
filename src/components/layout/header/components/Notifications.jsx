@@ -18,10 +18,6 @@ const Notifications = ({ icon }) => {
             <div
                 onClick={async (e) => {
                     e.stopPropagation()
-                    isActive &&
-                        (await getUserNotifications(
-                            +localStorage.getItem('id')
-                        ))
                     setIsActive(!isActive)
                 }}
                 className={
@@ -30,7 +26,7 @@ const Notifications = ({ icon }) => {
             >
                 {icon}
             </div>
-            <Dropdown hidden={isActive}>asd</Dropdown>
+            {isActive && <Dropdown>asd</Dropdown>}
         </div>
     )
 }

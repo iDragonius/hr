@@ -27,6 +27,10 @@ import MainInfo from '../../pages/profile/mainInfo/MainInfo'
 import AuthRequire from '../../features/auth/AuthRequire'
 import Staff from '../../pages/staffAdding/Staff'
 import StaffList from '../../pages/staffAdding/StaffList'
+import WorkingHoursList from '../../pages/workingHours/WorkingHoursList'
+import WorkingHoursAdd from '../../pages/workingHours/WorkingHoursAdd'
+import WorkingHoursAdminList from '../../pages/workingHours/WorkingHoursAdminList'
+import WorkingHoursListUser from '../../pages/workingHours/WorkingHoursListUser'
 
 const Navigation = () => {
     return (
@@ -81,7 +85,20 @@ const Navigation = () => {
 
                     <Route path={'vacation'} element={<Vacation />} />
                     <Route path={'permissions'} element={<Permissions />} />
-                    <Route path={'working-hours'} element={<WorkingHours />} />
+                    <Route path={'working-hours/'} element={<WorkingHours />}>
+                        <Route path={'list'} element={<WorkingHoursList />} />
+                        <Route element={<RoleWrapper routeRole={'2'} />}>
+                            <Route
+                                path={'admin-list'}
+                                element={<WorkingHoursAdminList />}
+                            />
+                            <Route
+                                path={'list/:id'}
+                                element={<WorkingHoursListUser />}
+                            />
+                        </Route>
+                        <Route path={'add'} element={<WorkingHoursAdd />} />
+                    </Route>
                     <Route path={'illness'} element={<Illness />} />
                 </Route>
             </Route>
